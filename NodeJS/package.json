@@ -2,10 +2,10 @@
   "name": "nodejs",
   "version": "1.0.0",
   "description": "",
-  "main": "www",
+  "main": "/bin/www",
   "scripts": {
-    "dev": "nodemon www",
-    "start": "./node_modules/.bin/cross-env NODE_ENV=development ./node_modules/.bin/nodemon www",
+    "dev": "nodemon /bin/www",
+    "start": "./node_modules/.bin/cross-env NODE_ENV=development ./node_modules/.bin/nodemon ./bin/www",
     "test": "./node_modules/.bin/cross-env NODE_ENV=test ./node_modules/.bin/babel-tape-runner test/test-*.js"
   },
   "author": "",

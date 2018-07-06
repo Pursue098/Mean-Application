@@ -5,13 +5,13 @@ const join = require('path').join;
 const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const config = require('./config');
+const config = require('../config/index');
 const bodyParser= require('body-parser')
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json');
+const swaggerDocument = require('../swagger.json');
 
-const models = join(__dirname, 'app/models');
+const models = join(__dirname, '../app/models');
 const port = process.env.PORT || 4000;
 
 var app = express();
@@ -23,10 +23,7 @@ app.use(cors({ origin: 'http://localhost:4200' }));
 var options = {
     explorer : true
 };
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
-
-// const { mongoose } = require('./db.js');
 
 /**
  * Expose
@@ -45,8 +42,8 @@ fs.readdirSync(models)
 
 // Bootstrap routes
 // require('./config/passport')(passport);
-require('./config/express')(app);
-require('./config/routes')(app);
+require('../config/express')(app);
+require('../config/routes')(app);
 
 
 function listen () {
