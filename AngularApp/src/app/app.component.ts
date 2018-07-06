@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { EmployeeService } from './shared/employee.service';
-import { AppConfigService } from './app-config.service';
+import { AppConfigService } from './shared/app-config.service';
 
 @Component({
   selector: 'app-root',

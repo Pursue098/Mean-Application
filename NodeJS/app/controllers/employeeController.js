@@ -14,6 +14,15 @@ router.get('/', (req, res) => {
         }
         else { console.log('Error in Retriving Employees :' + JSON.stringify(err, undefined, 2)); }
     });
+
+    // app.models.User.find({})
+    //     .select('first_name last_name username email')
+    //     .exec(function(err, users) {
+    //         if(err) next(err);
+    //
+    //         res.status(200)
+    //             .json(users || []);
+    //     });
 });
 
 router.get('/:id', (req, res) => {

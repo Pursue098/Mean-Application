@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 import { Employee } from './employee.model';
-import { AppConfigService } from '../app-config.service';
+import { AppConfigService } from './app-config.service';
 
 @Injectable()
 export class EmployeeService {
