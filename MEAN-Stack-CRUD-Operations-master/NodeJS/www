@@ -1,0 +1,65 @@
+
+require('dotenv').config();
+const fs = require('fs');
+const join = require('path').join;
+const express = require('express');
+const mongoose = require('mongoose');
+const passport = require('passport');
+const config = require('./config');
+const bodyParser= require('body-parser')
+const cors = require('cors');
+
+const models = join(__dirname, 'app/models');
+const port = process.env.PORT || 4000;
+
+var app = express();
+const connection = connect();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors({ origin: 'http://localhost:4200' }));
+
+// const { mongoose } = require('./db.js');
+
+/**
+ * Expose
+ */
+module.exports = {
+    app,
+    connection
+};
+
+// Bootstrap models
+console.log('models: ', models);
+
+fs.readdirSync(models)
+    .filter(file => ~file.indexOf('.js'))
+    .forEach(file => require(join(models, file)));
+
+// Bootstrap routes
+// require('./config/passport')(passport);
+require('./config/express')(app);
+require('./config/routes')(app);
+
+
+function listen () {
+    if (app.get('env') === 'test') return;
+    app.listen(port);
+
+    console.log('Express app started on port ' + port);
+    return true;
+}
+function connect () {
+
+    mongoose.connect(config.db, (err) => {
+        if (!err){
+            console.log('MongoDB connection succeeded.');
+            listen();
+        }
+        else{
+            console.log('Error in DB connection : ' + JSON.stringify(err, undefined, 2));
+        }
+    });
+
+    module.exports = mongoose;
+    return true;
+}
